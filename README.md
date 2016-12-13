@@ -1,0 +1,1 @@
+# if4072-tugas-speech-htk-scripts
