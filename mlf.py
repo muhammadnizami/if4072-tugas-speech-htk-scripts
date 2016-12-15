@@ -43,7 +43,7 @@ with open(dictfilename) as dictfile:
 of = open('words.mlf', 'w')
 of.write("#!MLF!#\n")
 for x in range(0, len(array_of_wav)):
-	of.write('"*/' + array_of_wav[x][:9] + array_of_wav[x][10:14] + '.lab"' + '\n')
+	array_of_dict_words = []
 	array_of_words = array_of_tsv[x].split(' ')
 	for y in array_of_words:
 		if (len(y)>0):
@@ -54,12 +54,16 @@ for x in range(0, len(array_of_wav)):
 			else:
 				word=(y.lower())
 			if ((word in dict_set) & (len(word)>0)):
-				of.write(word)
-				of.write('\n')
-	if (x<len(array_of_wav)):
-		of.write('.\n')
-	else:
-		of.write('.')
+				array_of_dict_words.append(word)
+	if (len(array_of_dict_words)>0):
+		for word in array_of_dict_words:
+			of.write(word)
+			of.write('\n')
+		of.write('"*/' + array_of_wav[x][:9] + array_of_wav[x][10:14] + '.lab"' + '\n')
+		if (x<len(array_of_wav)):
+			of.write('.\n')
+		else:
+			of.write('.')
 
 # print(array_of_tsv)
 # print(array_of_wav)
