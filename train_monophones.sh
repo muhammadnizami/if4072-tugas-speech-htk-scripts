@@ -26,7 +26,7 @@ do
 	echo "~h \"$line\"" >> hmm0/hmmdefs
 	echo $hmm>>hmm0/hmmdefs
 done
-for i in 1 2 3 4 5 6 7 8 9
+for i in 1 2 3
 do
 	mkdir -p hmm$i
 	prev=`expr $i - 1`
