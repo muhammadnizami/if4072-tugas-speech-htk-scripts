@@ -53,7 +53,7 @@ for x in range(0, len(array_of_wav)):
 				word=(y[:-1].lower())
 			else:
 				word=(y.lower())
-			if (word in dict_set):
+			if ((word in dict_set) & (len(word)>0)):
 				of.write(word)
 				of.write('\n')
 	if (x<len(array_of_wav)):
