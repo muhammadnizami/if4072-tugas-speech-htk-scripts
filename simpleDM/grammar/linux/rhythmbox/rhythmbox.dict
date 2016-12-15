@@ -1,0 +1,28 @@
+0	[<s>] sil
+1	[</s>] sil
+2	[COM] p l ey
+3	[rhythmbox-client --play] r ih dh ah m b aa k s
+4	[COM] s t aa p
+5	[rhythmbox-client --pause] r ih dh ah m b aa k s
+6	[COM] r ih dh ah m b aa k s
+6	[COM] p l ey er
+6	[COM] m y uw z ih k
+7	[rhythmbox-client --play] p l ey
+7	[rhythmbox-client --play] s t aa r t
+7	[rhythmbox-client --next] n eh k s t
+7	[rhythmbox-client --next] s k ih p
+7	[rhythmbox-client --next] f ao r w er d
+7	[rhythmbox-client --previous] p r iy v iy ah s
+7	[rhythmbox-client --previous] b ae k
+7	[rhythmbox/en/scripts/show.sh] sh ow
+7	[grammar/linux/rhythmbox/scripts/show.sh] hh uw
+7	[grammar/linux/rhythmbox/scripts/show.sh] ah b aw t
+7	[grammar/linux/rhythmbox/scripts/show.sh] ih n f ao r m ey sh ah n
+7	[rhythmbox-client --volume-up] ah p
+7	[rhythmbox-client --volume-up] l aw d er
+7	[rhythmbox-client --volume-down] d aw n
+7	[rhythmbox-client --volume-down] l ow er
+7	[rhythmbox-client --volume-down] s aa f t er
+7	[rhythmbox-client --pause] s ay l ah n s
+7	[rhythmbox-client --pause] s t aa p
+7	[rhythmbox-client --pause] k w ay ah t

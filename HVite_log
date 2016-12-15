@@ -1,0 +1,1 @@
+HVite -A -D -T 1 -l * -o SWT -b SENT-END -C monophone_hmm.conf -H hmm7/macros -H hmm7/hmmdefs -i aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I words.mlf -S train.scp dict monophones0 

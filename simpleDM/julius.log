@@ -1,0 +1,25 @@
+STAT: jconf successfully finalized
+STAT: *** loading AM00 _default
+Stat: init_phmm: Reading in HMM definition
+Stat: rdhmmdef: ascii format HMM definition
+Stat: rdhmmdef: limit check passed
+Stat: rdhmmdef: this HMM does not need multipath handling
+Stat: rdhmmdef: no <SID> embedded
+Stat: rdhmmdef: assign SID by the order of appearance
+Stat: init_phmm: defined HMMs:    33
+Stat: init_phmm: logical names:    33
+Stat: init_phmm: base phones:    33 used in logical
+Stat: init_phmm: finished reading HMM definitions
+Warning: init_phmm: no model named as "sp", no short pause model assigned
+STAT: *** AM00 _default loaded
+STAT: *** loading LM00 _default
+Error: voca_load_htkdict: line 146620: phone "SPN" not found
+Error: voca_load_htkdict: the line content was: sangat<euh> [sangat<euh>] s a ng a t SPN
+Error: voca_load_htkdict: line 168663: phone "SPN" not found
+Error: voca_load_htkdict: the line content was: terdapat<euh> [terdapat<euh>] t @ r d a p a t SPN
+Error: voca_load_htkdict: begin missing phones
+Error: voca_load_htkdict: SPN
+Error: voca_load_htkdict: end missing phones
+Error: init_voca: error in reading ../output_sorted_cut.txt: 2 words failed out of 182634 words
+ERROR: m_fusion: failed to read dictionary, terminated
+ERROR: m_fusion: failed to initialize dictionary
