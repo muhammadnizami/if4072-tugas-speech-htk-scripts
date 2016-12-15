@@ -66,7 +66,7 @@ for x in range(0, len(array_of_wav)):
 			if ((word in dict_set) & (len(word)>0)):
 				array_of_dict_words.append(word)
 	if (len(array_of_dict_words)>0):
-		trainof.write(array_of_mfcc_complete_path[x][:25]+array_of_mfcc_complete_path[x][26:]+'\n')
+		trainof.write(array_of_mfcc_complete_path[x][:25]+array_of_mfcc_complete_path[x][26:30]+'.mfc'+'\n')
 		of.write('"*/' + array_of_wav[x][:9] + array_of_wav[x][10:14] + '.lab"' + '\n')
 		for word in array_of_dict_words:
 			of.write(word)
