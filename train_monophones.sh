@@ -53,10 +53,40 @@ echo "<TRANSP> 3
 cat hmm4/hmmdefs_sp>>hmm4/hmmdefs
 rm hmm4/hmmdefs_sp
 
-mkdir hmm5
+mkdir -p hmm5
 
 HHEd -A -D -T 1 -H hmm4/macros -H hmm4/hmmdefs -M hmm5 sil.hed monophones0
 
-mkdir hmm6
+mkdir -p hmm6
 
 HERest -A -D -T 1 -C monophone_hmm.conf  -I phones0.mlf -t 250.0 150.0 3000.0 -S train.scp -H hmm5/macros -H  hmm5/hmmdefs -M hmm6 monophones0
+
+mkdir -p hmm7
+
+HERest -A -D -T 1 -C monophone_hmm.conf  -I phones0.mlf -t 250.0 150.0 3000.0 -S train.scp -H hmm6/macros -H  hmm6/hmmdefs -M hmm7 monophones0
+
+mkdir -p hmm8
+
+HVite -A -D -T 1 -l '*' -o SWT -b SENT-END -C monophone_hmm.conf -H hmm7/macros -H hmm7/hmmdefs -i aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I words.mlf -S train.scp dict monophones0 > HVite_log
+
+echo "\"*/A32LTL026B266.lab\"
+sil
+b
+u
+k
+a
+ny
+a
+j
+a
+m
+b
+e
+r
+a
+p
+a
+sil
+." >> aligned.mlf
+
+HERest -A -D -T 1 -C monophone_hmm.conf -I aligned.mlf -t 250.0 150.0 3000.0 -S train.scp -H hmm7/macros -H hmm7/hmmdefs -M hmm8 monophones0 
