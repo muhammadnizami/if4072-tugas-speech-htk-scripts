@@ -1,5 +1,12 @@
 config_file=monophone_hmm.conf
 
+mkdir -p hmm0
+
+#create monophones0
+cat monophones1 > monophones0
+echo "sil">>monophones0
+
+#train hmm0
 HCompV -A -D -T 1 -C $config_file -f 0.01 -m -S train.scp -M hmm0 proto
 
 #create macros
@@ -13,15 +20,14 @@ echo "~o
 #create hmmdefs
 echo "" > hmm0/hmmdefs
 hmm=$(sed -n '/\<BEGINHMM\>/,$p' hmm0/proto)
-cat monophones1 |
+cat monophones0 |
 while read line
 do
 	echo "~h \"$line\"" >> hmm0/hmmdefs
 	echo $hmm>>hmm0/hmmdefs
 done
-
 for i in 1 2 3 4 5 6 7 8 9
 do
 	prev=`expr $i - 1`
-	HERest -A -D -T 1 -C $config_file -I phones0.mlf -t 250.0 150.0 1000.0 -S train.scp -H hmm$prev/macros -H hmm$prev/hmmdefs -M hmm$i monophones1
+	HERest -A -D -T 1 -C $config_file -I phones0.mlf -t 250.0 150.0 1000.0 -S train.scp -H hmm$prev/macros -H hmm$prev/hmmdefs -M hmm$i monophones0
 done
