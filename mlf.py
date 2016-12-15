@@ -34,13 +34,17 @@ for x in range(0, len(array_of_wav)):
 	of.write('"*/' + array_of_wav[x][:9] + array_of_wav[x][10:14] + '.lab"' + '\n')
 	array_of_words = array_of_tsv[x].split(' ')
 	for y in array_of_words:
-		last_y = y[-1:]
-		if ((last_y == '.') | (last_y == '?') | (last_y == '!') | (last_y == ',')):
-			of.write(y[:-1].lower())
-		else:
-			of.write(y.lower())
-		of.write('\n')
-	of.write('.\n')
+		if (len(y)>0):
+			last_y = y[-1:]
+			if ((last_y == '.') | (last_y == '?') | (last_y == '!') | (last_y == ',')):
+				of.write(y[:-1].lower())
+			else:
+				of.write(y.lower())
+			of.write('\n')
+	if (x<len(array_of_wav)):
+		of.write('.\n')
+	else:
+		of.write('.')
 
 # print(array_of_tsv)
 # print(array_of_wav)
