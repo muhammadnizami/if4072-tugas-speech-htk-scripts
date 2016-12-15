@@ -28,6 +28,7 @@ do
 done
 for i in 1 2 3 4 5 6 7 8 9
 do
+	mkdir -p hmm$i
 	prev=`expr $i - 1`
 	HERest -A -D -T 1 -C $config_file -I phones0.mlf -t 250.0 150.0 1000.0 -S train.scp -H hmm$prev/macros -H hmm$prev/hmmdefs -M hmm$i monophones0
 done
