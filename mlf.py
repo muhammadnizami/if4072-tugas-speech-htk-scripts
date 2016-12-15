@@ -3,15 +3,20 @@ import os
 #listing file
 rootdir_wav = "set_2"
 array_of_wav = []
+array_of_mfcc_complete_path = []
 for subdir, dirs, files in os.walk(rootdir_wav):
 	dirs.sort()
 	files.sort()
 	for file in files:
 		filepath = file
+		mfcc_file_path=subdir[:5]+"_mfcc"+subdir[5:]+'/'+file[:-4]+".mfc"
+		mfcc_file_path = mfcc_file_path[:-8]+' '+mfcc_file_path[-8:]
+		array_of_mfcc_complete_path.append(mfcc_file_path)
 		filepath = filepath[:9] + " " + filepath[9:17]
 		array_of_wav.append(filepath)
 
 array_of_wav.sort(key=lambda s: s.split()[1])
+array_of_mfcc_complete_path.sort(key=lambda s: s.split())
 
 #listing sentences
 rootdir_tsv = "transcript"
@@ -39,7 +44,8 @@ with open(dictfilename) as dictfile:
 		if (len(separate_by_space)>=1):
 			dict_set = dict_set | set([separate_by_space[0]])
 
-#writing down
+#writing down words.mlf and train.scp
+trainof = open('train.scp', 'w')
 of = open('words.mlf', 'w')
 of.write("#!MLF!#\n")
 for x in range(0, len(array_of_wav)):
@@ -56,10 +62,11 @@ for x in range(0, len(array_of_wav)):
 			if ((word in dict_set) & (len(word)>0)):
 				array_of_dict_words.append(word)
 	if (len(array_of_dict_words)>0):
+		trainof.write(array_of_mfcc_complete_path[x][:-9]+array_of_mfcc_complete_path[x][:-8]+'\n')
+		of.write('"*/' + array_of_wav[x][:9] + array_of_wav[x][10:14] + '.lab"' + '\n')
 		for word in array_of_dict_words:
 			of.write(word)
 			of.write('\n')
-		of.write('"*/' + array_of_wav[x][:9] + array_of_wav[x][10:14] + '.lab"' + '\n')
 		if (x<len(array_of_wav)):
 			of.write('.\n')
 		else:
