@@ -10,17 +10,18 @@ for subdir, dirs, files in os.walk(rootdir_wav):
 	for file in files:
 		filepath = file
 		mfcc_file_path=subdir[:5]+"_mfcc"+subdir[5:]+'/'+file[:-4]+".mfc"
-		mfcc_file_path = mfcc_file_path[:-8]+' '+mfcc_file_path[-8:]
+		mfcc_file_path = mfcc_file_path[:25]+' '+mfcc_file_path[25:]
 		array_of_mfcc_complete_path.append(mfcc_file_path)
 		filepath = filepath[:9] + " " + filepath[9:17]
 		array_of_wav.append(filepath)
 
 array_of_wav.sort(key=lambda s: s.split()[1])
-array_of_mfcc_complete_path.sort(key=lambda s: s.split())
+array_of_mfcc_complete_path.sort(key=lambda s: s.split()[1])
 
 #listing sentences
 rootdir_tsv = "transcript"
 array_of_tsv = []
+map_of_transcript = {}
 for subdir, dirs, files in os.walk(rootdir_tsv):
 	dirs.sort()
 	files.sort()
@@ -31,8 +32,10 @@ for subdir, dirs, files in os.walk(rootdir_tsv):
 				separate_by_enter = tsv.read().split('\n')
 				for x in separate_by_enter:
 					separate_by_tab = x.split('\t')
-					if (len(separate_by_tab) >= 2):
+					if(len(separate_by_tab) >= 2):
+						num_str = file[0]+separate_by_tab[0].split('_')[1]
 						array_of_tsv.append(separate_by_tab[1])
+						map_of_transcript[num_str]=separate_by_tab[1]
 
 #loading pronounciation dictionary
 dictfilename = "dict"
@@ -50,7 +53,8 @@ of = open('words.mlf', 'w')
 of.write("#!MLF!#\n")
 for x in range(0, len(array_of_wav)):
 	array_of_dict_words = []
-	array_of_words = array_of_tsv[x].split(' ')
+	num_str=array_of_wav[x][10:14]
+	array_of_words = map_of_transcript[num_str].split(' ')
 	for y in array_of_words:
 		if (len(y)>0):
 			last_y = y[-1:]
@@ -62,7 +66,7 @@ for x in range(0, len(array_of_wav)):
 			if ((word in dict_set) & (len(word)>0)):
 				array_of_dict_words.append(word)
 	if (len(array_of_dict_words)>0):
-		trainof.write(array_of_mfcc_complete_path[x][:-9]+array_of_mfcc_complete_path[x][:-8]+'\n')
+		trainof.write(array_of_mfcc_complete_path[x][:25]+array_of_mfcc_complete_path[x][26:]+'\n')
 		of.write('"*/' + array_of_wav[x][:9] + array_of_wav[x][10:14] + '.lab"' + '\n')
 		for word in array_of_dict_words:
 			of.write(word)
