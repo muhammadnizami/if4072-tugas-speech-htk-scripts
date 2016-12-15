@@ -1,6 +1,6 @@
 import os
 
-rootdir_wav = "/home/ginanjarbusiri/Downloads/NLP Speech/set_2"
+rootdir_wav = "set_2"
 array_of_wav = []
 for subdir, dirs, files in os.walk(rootdir_wav):
     dirs.sort()
@@ -13,7 +13,7 @@ for subdir, dirs, files in os.walk(rootdir_wav):
 array_of_wav.sort(key=lambda s: s.split()[1])
 
 
-rootdir_tsv = "/home/ginanjarbusiri/Downloads/NLP Speech/transcript"
+rootdir_tsv = "transcript"
 array_of_tsv = []
 for subdir, dirs, files in os.walk(rootdir_tsv):
     dirs.sort()
@@ -29,7 +29,7 @@ for subdir, dirs, files in os.walk(rootdir_tsv):
         				array_of_tsv.append(separate_by_tab[1])
 
 of = open('words.mlf', 'w')
-of.write("#!MLF!#")
+of.write("#!MLF!#\n")
 for x in range(0, len(array_of_wav)):
 	of.write('"*/' + array_of_wav[x][:9] + array_of_wav[x][10:14] + '.lab"' + '\n')
 	array_of_words = array_of_tsv[x].split(' ')
