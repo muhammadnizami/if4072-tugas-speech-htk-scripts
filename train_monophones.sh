@@ -89,4 +89,5 @@ a
 sil
 ." >> aligned.mlf
 
-HERest -A -D -T 1 -C monophone_hmm.conf -I aligned.mlf -t 250.0 150.0 3000.0 -S train.scp -H hmm7/macros -H hmm7/hmmdefs -M hmm8 monophones0 
+mkdir -p hmm9
+HERest -A -D -T 1 -C monophone_hmm.conf -I aligned.mlf -t 250.0 150.0 3000.0 -S train.scp -H hmm8/macros -H hmm8/hmmdefs -M hmm9 monophones0
