@@ -26,9 +26,37 @@ do
 	echo "~h \"$line\"" >> hmm0/hmmdefs
 	echo $hmm>>hmm0/hmmdefs
 done
-for i in 1 2 3 4 5 6 7 8 9
+for i in 1 2 3
 do
 	mkdir -p hmm$i
 	prev=`expr $i - 1`
 	HERest -A -D -T 1 -C $config_file -I phones0.mlf -t 250.0 150.0 1000.0 -S train.scp -H hmm$prev/macros -H hmm$prev/hmmdefs -M hmm$i monophones0
 done
+
+#fixing the silence model
+mkdir -p hmm4
+cp hmm3/hmmdefs hmm4/hmmdefs
+cp hmm3/macros hmm4/macros
+
+sed -n '/\"sil\"/,$p' hmm4/hmmdefs > hmm4/hmmdefs_sp
+sed -i '1s/.*/~h \"sp\"/' hmm4/hmmdefs_sp
+sed -i '3s/.*/<NUMSTATES> 3/' hmm4/hmmdefs_sp
+sed -i -e '4,9d;16,21d' hmm4/hmmdefs_sp
+sed -i '4s/.*/<STATE> 2/' hmm4/hmmdefs_sp
+sed -i -e '10,16d' hmm4/hmmdefs_sp
+echo "<TRANSP> 3
+ 0.0 1.0 0.0
+ 0.0 0.9 0.1
+ 0.0 0.0 0.0
+<ENDHMM>" >> hmm4/hmmdefs_sp
+
+cat hmm4/hmmdefs_sp>>hmm4/hmmdefs
+rm hmm4/hmmdefs_sp
+
+mkdir hmm5
+
+HHEd -A -D -T 1 -H hmm4/macros -H hmm4/hmmdefs -M hmm5 sil.hed monophones0
+
+mkdir hmm6
+
+HERest -A -D -T 1 -C monophone_hmm.conf  -I phones0.mlf -t 250.0 150.0 3000.0 -S train.scp -H hmm5/macros -H  hmm5/hmmdefs -M hmm6 monophones0
