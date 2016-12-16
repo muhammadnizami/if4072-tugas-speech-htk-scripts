@@ -15,7 +15,7 @@
 #-hlist ../howto/acoustic_model/tiedlist
 
 -d ../lm_binary
--v ../output_sorted_cut.txt
+-v ../output_sorted.txt
 
 -spmodel "sp"		# HMM model name
 #-multipath
